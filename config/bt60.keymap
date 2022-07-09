@@ -48,14 +48,14 @@
 				&kp NON_US_BSLH &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
 				&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
 				&trans &trans &trans &trans &trans &trans &trans &trans	&trans &trans &trans &trans &trans &trans
-				&kp GRAVE &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+				&trans &kp GRAVE &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
 				&kp LWIN &kp LCTRL &kp LALT &trans &kp RALT &kp RCTRL &kp RWIN &trans
 			>;
         	};
 		
 		caps_layer {
 			bindings = <
-				&kp LC(GRAVE) &kp LC(N1) &kp LC(N2) &kp LC(N3) &kp LC(N4) &kp LC(N5) &kp LC(N6) &kp LC(N7) &kp LC(N8) &kp LC(N9) &kp LC(N0) &kp LC(MINUS) &kp LC(EQUAL) &kp LC(BSPC)
+				&kp LC(GRAVE) &kp LC(N1) &kp LC(N2) &kp LC(N3) &kp LC(N4) &kp LC(N5) &kp LC(N6) &kp LC(N7) &kp LC(N8) &kp LC(N9) &kp LC(N0) &kp LC(MINUS) &kp LC(EQUAL) &kp DEL
 				&kp LC(TAB) &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R) &kp LC(T) &kp LC(Y) &kp LC(U) &kp LC(I) &kp LC(O) &kp LC(P) &kp LC(LBKT) &kp LC(RBKT)
 				&trans &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F) &kp LC(G) &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp LC(SEMI) &kp LC(SQT) &kp LC(NON_US_HASH) &kp LC(RET)
 				&kp LC(LSHFT) &kp LC(NON_US_BSLH) &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V) &kp LC(B) &kp LC(N) &kp LC(M) &kp LC(COMMA) &kp LC(DOT) &kp LC(FSLH) &kp LC(RSHFT)
