@@ -4,6 +4,12 @@
 #include <dt-bindings/zmk/rgb.h>
 #include <dt-bindings/zmk/backlight.h>
 
+#define DEFAULT 0
+#define SYS     1
+#define MAC     2
+#define SFX     3
+#define ALT     4
+
 / {
 	keymap {
 		compatible = "zmk,keymap";
@@ -13,26 +19,60 @@
 				// |  `  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  0  |  -  |  =  |   BKSP
 				// | TAB  |  Q  |  W  |  E  |  R  |  T  |  Y  |  U  |  I  |  O  |  P  |  [  |  ]  |        |
 				// | CAPS  |  A  |  S  |  D  |  F  |  G  |  H  |  J  |  K  |  L  |  ;  |  '  |  #  | ENTER |
-				// |  SHIFT|  \ |  Z  |  X  |  C  |  V  |  B  |  N  |  M  |  ,  |  .  | /   |    SHIFT    |
-				// |  CTL  |  WIN  |  ALT  |            SPACE               | ALT | 1    |  MENU    |  CTRL|
+				// |  SHIFT|  \ |  Z  |  X  |  C  |  V  |  B  |  N  |  M  |  ,  |  .  | /    |    SHIFT    |
+				// |  CTL  |  WIN  |  ALT  |            SPACE               | ALT | WIN    |  CTLR    |  1 |
 				// ------------------------------------------------------------------------------------------
 			bindings = <
 
-				&kp ESC &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7 &kp  N8   &kp  N9 &kp  N0  &kp MINUS &kp EQUAL &kp BSPC
+				&kp GRAVE &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7 &kp  N8   &kp  N9 &kp  N0  &kp MINUS &kp EQUAL &kp BSPC
 				&kp TAB  &kp Q  &kp W  &kp E  &kp R  &kp T  &kp Y  &kp U  &kp  I    &kp  O  &kp  P   &kp LBKT &kp RBKT
-				&kp CAPS  &kp A  &kp S  &kp D  &kp F  &kp G  &kp H  &kp J  &kp  K    &kp  L  &kp SEMI &kp SQT &kp NON_US_HASH  &kp RET
+				&lt SFX ESC &kp A  &kp S  &kp D  &kp F  &kp G  &kp H  &kp J  &kp  K    &kp  L  &kp SEMI &kp SQT &kp NON_US_HASH  &kp RET
 				&kp LSHFT &kp NON_US_BSLH &kp Z  &kp X  &kp C  &kp V  &kp B  &kp N  &kp M  &kp COMMA &kp DOT &kp FSLH         &kp RSHFT
-				&kp LCTRL &kp LGUI &kp LALT            &kp SPACE                          &kp RALT  &mo 1 &kp C_MENU    &kp RCTRL
+				&kp LCTRL &kp LGUI &kp LALT            &kp SPACE                          &kp RALT  &kp RGUI &kp RCTL &mo SYS
 			>;
 			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
 		};
-		raise {
+		
+		sys_layer {
 			bindings = <
-				&bt BT_CLR &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6 &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12 &kp DEL
-				&trans &trans &kp UP &trans &trans &trans &trans &trans &kp INS &trans &kp PSCRN &kp SLCK &kp PAUSE_BREAK
-				&kp CAPS    &kp LEFT &kp DOWN &kp RIGHT &trans &trans &trans &trans &trans &trans &kp HOME  &kp PG_UP &trans  &bootloader
-				&kp C_PREV &kp C_VOL_DN &kp C_VOL_UP &kp C_MUTE &bl BL_INC &bl BL_DEC &trans &trans &trans &rgb_ug RGB_TOG &kp END &kp PG_DN  &bl BL_TOG
-				&bt BT_PRV &bt BT_NXT  &trans              &trans                            &trans   &trans   &reset &bt BT_CLR
+				&bootloader &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &kp F4 &kp F5 &kp F6 &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12 &reset
+				&none &bt BT_CLR &bt BT_PRV &bt BT_NXT &out OUT_TOG &none &none &out OUT_USB &none &none &none &none &none
+				&none &none &none &none &none &none &none &none	&none &none &none &none &none &none
+				&none &none &none &none &none &none &out OUT_BLE &none &tog MAC &none &none &none &rgb_ug RGB_TOG
+				&none &none &none &none &none &none &none &trans
+			>;
+			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+		}
+		
+		mac_layer {
+			bindings = <
+				&kp NON_US_BSLSH &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+				&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+				&trans &trans &trans &trans &trans &trans &trans &trans	&trans &trans &trans &trans &trans &trans &trans
+				&trans &kp GRAVE &trans &trans &trans &trans &trans &trans &trans &trans &trans	&trans &trans &trans
+				&kp LWIN &kp LCTRL &kp LALT &trans &kp RALT &kp RCTRL &kp RWIN &trans
+			>;
+			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+        	};
+		
+		caps_layer {
+			bindings = <
+				&kp LC(GRAVE) &kp LC(N1) &kp LC(N2) &kp LC(N3) &kp LC(N4) &kp LC(N5) &kp LC(N6) &kp LC(N7) &kp LC(N8) &kp LC(N9) &kp LC(N0) &kp LC(MINUS) &kp LC(EQUAL) &kp LC(BSPC)
+				&kp LC(TAB) &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R) &kp LC(T) &kp LC(Y) &kp LC(U) &kp LC(I) &kp LC(O) &kp LC(P) &kp LC(LBKT) &kp LC(RBKT)
+				&trans &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F) &kp LC(G) &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp LC(SEMI) &kp LC(SQT) &kp LC(NON_US_HASH) &kp LC(RET)
+				&kp LC(LSHFT) &kp LC(NON_US_BSLH) &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V) &kp LC(B) &kp LC(N) &kp LC(M) &kp LC(COMMA) &kp LC(DOT) &kp LC(FSLH) &kp LC(RSHFT)
+				&kp LC(LCTRL) &kp LC(LGUI) &kp LC(LALT) &kp LC(SPACE) &kp LC(RALT) &kp LC(RGUI) &kp LC(RCTL) &trans
+            		>;
+			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+        	};
+
+		alt_layer {
+			bindings = <
+				&kp LA(GRAVE) &kp LA(N1) &kp LA(N2) &kp LA(N3) &kp LA(N4) &kp LA(N5) &kp LA(N6) &kp RA(N7) &kp RA(N8) &kp RA(N9) &kp RA(N0) &kp RA(MINUS) &kp LA(EQUAL) &kp LA(BSPC)
+				&kp LA(TAB) &kp RA(Q) &kp LA(W) &kp LA(E) &kp LA(R) &kp LA(T) &kp LA(Y) &kp LA(U) &kp LA(I) &kp LA(O) &kp LA(P) &kp LA(LBKT) &kp LA(RBKT)
+				&kp LA(ESC) &kp LA(A) &kp LA(S) &kp LA(D) &kp LA(F) &kp LA(G) &kp LA(H) &kp LA(J) &kp LA(K) &kp LA(L) &kp LA(SEMI) &kp LA(SQT) &kp LA(NON_US_HASH) &kp LA(RET)
+				&kp LA(LSHFT) &kp LA(NON_US_BSLH) &kp LA(Z) &kp LA(X) &kp LA(C)	&kp LA(V) &kp LA(B) &kp LA(N) &kp LA(M)	&kp LA(COMMA) &kp LA(DOT) &kp LA(FSLH) &kp LA(RSHFT)
+				&kp LA(LCTRL) &kp LA(LGUI) &kp LA(LALT) &kp LA(SPACE) &kp LA(RALT) &kp LA(RGUI) &kp LA(RCTL) &trans
 			>;
 			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
 		};
