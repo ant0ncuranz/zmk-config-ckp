@@ -6,8 +6,8 @@
 #include <dt-bindings/zmk/outputs.h>
 
 #define DEFAULT 0
-#define L_FX    1
-#define L_MAC   2
+#define L_MAC   1
+#define L_FX    2
 #define L_CAPS  3
 #define L_ALT   4
 
@@ -33,16 +33,6 @@
 			>;
 		};
 		
-		fx_layer {
-			bindings = <
-				&bootloader &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &kp F4 &kp F5 &kp F6 &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12 &reset
-				&none &bt BT_CLR &bt BT_PRV &bt BT_NXT &out OUT_TOG &none &none &out OUT_USB &none &none &none &none &none
-				&none &none &none &none &none &none &none &none	&none &none &none &none &none &none
-				&none &none &none &none &none &none &out OUT_BLE &none &tog L_MAC &none &none &kp UP &rgb_ug RGB_TOG
-				&none &none &none &none &kp LEFT &kp DOWN &kp RIGHT &trans
-			>;
-		};
-		
 		mac_layer {
 			bindings = <
 				&kp NON_US_BSLH &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
@@ -52,6 +42,16 @@
 				&kp LWIN &kp LCTRL &kp LALT &trans &kp RALT &kp RCTRL &kp RWIN &trans
 			>;
         	};
+		
+		fx_layer {
+			bindings = <
+				&bootloader &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &kp F4 &kp F5 &kp F6 &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12 &reset
+				&none &bt BT_CLR &bt BT_PRV &bt BT_NXT &out OUT_TOG &none &none &out OUT_USB &none &none &none &none &none
+				&none &none &none &none &none &none &none &none	&none &none &none &none &none &none
+				&none &none &none &none &none &none &out OUT_BLE &none &tog L_MAC &none &none &kp UP &rgb_ug RGB_TOG
+				&none &none &none &none &kp LEFT &kp DOWN &kp RIGHT &trans
+			>;
+		};
 		
 		caps_layer {
 			bindings = <
